@@ -7,7 +7,7 @@ export class BoardsController extends BaseController {
     this.router
       .use(Auth0Provider.getAuthorizedUserInfo)
       .get('/:userId', this.getBoards)
-      // .post('', this.createBoard)
+      .post('', this.createBoard)
       // .put('/:boardId', this.editBoard)
       // .delete('boardId', this.deleteBoard)
   }
@@ -16,6 +16,16 @@ export class BoardsController extends BaseController {
     try {
       const boards = await boardsService.getBoards(req.params.userId)
       return res.send(boards)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async createBoard(req, res, next) {
+    try {
+      req.body.creatorId = req.userInfo.id
+      const board = await boardsService.createBoard(req.body)
+      return res.send(board)
     } catch (error) {
       next(error)
     }
