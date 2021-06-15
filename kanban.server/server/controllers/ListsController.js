@@ -26,7 +26,7 @@ export class ListsController extends BaseController {
 
   async getTasksByListId(req, res, next) {
     try {
-      const tasks = await tasksService.getTasks({ listId: req.params.id })
+      const tasks = await tasksService.getTasksByListId({ listId: req.params.id })
       return res.send(tasks)
     } catch (error) {
       next(error)
@@ -45,7 +45,7 @@ export class ListsController extends BaseController {
 
   async editList(req, res, next) {
     try {
-      req.body.id = req.userInfo.id
+      req.body.creatorId = req.userInfo.id
       const data = await listsService.editList(req.body)
       return res.send(data)
     } catch (error) {
