@@ -5,8 +5,8 @@ class ListsService {
     return await dbContext.List.find(id)
   }
 
-  async getList(id) {
-    return await dbContext.List.findById({ _id: id })
+  async getList(listId) {
+    return await dbContext.List.findById({ _id: listId })
   }
 
   async createList(body) {
