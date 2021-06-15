@@ -1,12 +1,12 @@
 import { dbContext } from '../db/DbContext'
 
 class TasksService {
-  async getTasks() {
-    return await dbContext.Tasks.find()
+  async getTasks(id = {}) {
+    return await dbContext.Task.find(id)
   }
 
-  async createTasks(taskData) {
-    return await dbContext.Tasks.create(taskData)
+  async createTasks(body) {
+    return await dbContext.Task.create(body)
   }
 }
 

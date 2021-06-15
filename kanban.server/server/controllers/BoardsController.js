@@ -7,17 +7,18 @@ export class BoardsController extends BaseController {
     super('api/boards')
     this.router
       .use(Auth0Provider.getAuthorizedUserInfo)
-      .get('/:userId', this.getBoards)
-      .get('/:userId/:id', this.getOne)
-      .get('/:userId/:boardId/lists', this.getListsByBoardId)
+      .get('', this.getBoards)
+      .get(':id', this.getOne)
+      .get(':id/lists', this.getListsByBoardId)
       .post('', this.createBoard)
-      // .put('/:boardId', this.editBoard)
-      // .delete('boardId', this.deleteBoard)
+      .put('/:id', this.editBoard)
+      .delete(':id', this.deleteBoard)
   }
 
   async getBoards(req, res, next) {
     try {
-      const boards = await boardsService.getBoards(req.params.userId)
+      req.body.creatorId = req.userInfo.id
+      const boards = await boardsService.getBoards({ creatorId: req.userInfo.id })
       return res.send(boards)
     } catch (error) {
       next(error)
@@ -35,7 +36,7 @@ export class BoardsController extends BaseController {
 
   async getListsByBoardId(req, res, next) {
     try {
-      const lists = listsService.getListsByBoardId(req.params.boardId)
+      const lists = listsService.getListsByBoardId({ boardId: req.params.id })
       return res.send(lists)
     } catch (error) {
       next(error)
@@ -45,8 +46,28 @@ export class BoardsController extends BaseController {
   async createBoard(req, res, next) {
     try {
       req.body.creatorId = req.userInfo.id
-      const board = await boardsService.createBoard(req.body)
-      return res.send(board)
+      const newBoard = await boardsService.createBoard(req.body)
+      return res.send(newBoard)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async editBoard(req, res, next) {
+    try {
+      req.body.id = req.params.id
+      const data = await boardsService.editBoard(req.body)
+      return res.send(data)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async deleteBoard(req, res, next) {
+    try {
+      req.body.id = req.params.id
+      const data = await boardsService.deleteBoard(req.params.id, req.userInfo.id)
+      return res.send(data)
     } catch (error) {
       next(error)
     }
