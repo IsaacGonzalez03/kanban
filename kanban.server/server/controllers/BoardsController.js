@@ -7,27 +7,27 @@ export class BoardsController extends BaseController {
     super('api/boards')
     this.router
       .use(Auth0Provider.getAuthorizedUserInfo)
-      .get('', this.getBoards)
-      .get(':id', this.getOne)
+      .get('', this.getAllBoards)
+      .get(':id', this.getOneBoard)
       .get(':id/lists', this.getListsByBoardId)
       .post('', this.createBoard)
       .put('/:id', this.editBoard)
       .delete(':id', this.deleteBoard)
   }
 
-  async getBoards(req, res, next) {
+  async getAllBoards(req, res, next) {
     try {
       req.body.creatorId = req.userInfo.id
-      const boards = await boardsService.getBoards({ creatorId: req.userInfo.id })
+      const boards = await boardsService.getAllBoards({ creatorId: req.userInfo.id })
       return res.send(boards)
     } catch (error) {
       next(error)
     }
   }
 
-  async getOne(req, res, next) {
+  async getOneBoard(req, res, next) {
     try {
-      const board = await boardsService.getOne(req.params.id)
+      const board = await boardsService.getOneBoard(req.params.id)
       return res.send(board)
     } catch (error) {
       next(error)

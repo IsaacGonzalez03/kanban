@@ -1,11 +1,11 @@
 import { dbContext } from '../db/DbContext'
 import { BadRequest } from '../utils/Errors'
 class BoardsService {
-  async getBoards(id = {}) {
+  async getAllBoards(id = {}) {
     return await dbContext.Board.find(id)
   }
 
-  async getOne(boardId) {
+  async getOneBoard(boardId) {
     const data = await dbContext.Board.findById({ _id: boardId })
     if (!data) throw new BadRequest('Invalid Id')
     return data
