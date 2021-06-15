@@ -15,20 +15,11 @@
 </template>
 
 <script>
-import { onMounted } from '@vue/runtime-core'
-import { boardsService } from '../services/BoardsService'
-import Notification from '../utils/Notification'
+
 export default {
   name: 'Home',
 
   setup() {
-    onMounted(async() => {
-      try {
-        boardsService.getBoards()
-      } catch (error) {
-        Notification.error('error')
-      }
-    })
     return {
 
     }
