@@ -7,6 +7,16 @@ export class ListsController extends BaseController {
     this.router
       .post('', this.createList)
       .get('/:id', this.getList)
+      .get('', this.getAll)
+  }
+
+  async getAll(req, res, next) {
+    try {
+      const lists = await listsService.getAll()
+      return res.send(lists)
+    } catch (error) {
+      next(error)
+    }
   }
 
   async getList(req, res, next) {
