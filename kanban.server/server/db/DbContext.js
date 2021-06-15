@@ -10,10 +10,6 @@ class DbContext {
   Values = mongoose.model('Value', ValueSchema);
   Account = mongoose.model('Account', AccountSchema);
   Boards = mongoose.model('Board', BoardSchema);
-<<<<<<< HEAD
-=======
-  Comments = mongoose.model('Comment', CommentSchema);
->>>>>>> 93ede9fb9ba2bdc3bb07dce94c73f08b490d318f
   Lists = mongoose.model('List', ListSchema);
   Tasks = mongoose.model('Task', TaskSchema);
   Comments = mongoose.model('Comment', CommentSchema);
