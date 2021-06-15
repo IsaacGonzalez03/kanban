@@ -1,8 +1,8 @@
 import { dbContext } from '../db/DbContext'
 
 class TasksService {
-  async getTasks(userId) {
-    return await dbContext.Tasks.find({ creatorId: userId })
+  async getTasks() {
+    return await dbContext.Tasks.find()
   }
 
   async createTasks(taskData) {

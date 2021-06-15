@@ -5,7 +5,7 @@ export class TasksController extends BaseController {
   constructor() {
     super('api/tasks')
     this.router
-      .get('/', this.getTasks)
+      .get('', this.getTasks)
       .post('', this.createTasks)
   }
 
