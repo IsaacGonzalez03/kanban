@@ -17,6 +17,11 @@ class BoardsService {
     AppState.boards = res.data
     logger.log(res)
   }
+
+  async getBoardInfo(id) {
+    const res = await api.get('api/boards/' + id)
+    logger.log('get the info for board', res)
+  }
 }
 
 export const boardsService = new BoardsService()
