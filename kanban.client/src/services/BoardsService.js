@@ -22,6 +22,11 @@ class BoardsService {
     const res = await api.get('api/boards/' + id)
     logger.log('get the info for board', res)
   }
+
+  async deleteBoard(id) {
+    const res = api.delete('api/boards' + id)
+    logger.log(res)
+  }
 }
 
 export const boardsService = new BoardsService()

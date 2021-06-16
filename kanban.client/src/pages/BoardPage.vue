@@ -1,7 +1,9 @@
 <template>
-  <div class="row">
-    <h1>this is the board page</h1>
-    <List v-for="l in lists" :key="l.id" :list="l" />
+  <div class="container-fluid">
+    <div class="row">
+      <h1>this is the board page</h1>
+      <List v-for="l in lists" :key="l.id" :list="l" />
+    </div>
   </div>
 </template>
 

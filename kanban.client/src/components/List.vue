@@ -4,6 +4,8 @@
       <p>list items</p>
       <h3>{{ list.title }}</h3>
       <h3>{{ list.description }}</h3>
+
+      <Task />
     </div>
   </div>
 </template>
