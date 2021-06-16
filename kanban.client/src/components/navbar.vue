@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-info d-flex align-items-center">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div class="d-flex flex-column align-items-center">
-        <h1 class="fw-bolder font-monospace">
+        <h1 class="fw-bolder font-monospace m-3">
           KANBAN
         </h1>
       </div>
