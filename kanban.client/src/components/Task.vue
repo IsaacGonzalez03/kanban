@@ -1,6 +1,6 @@
 <template>
   <div class="task row">
-    <div class="col-4">
+    <div class="col">
       <div class="card">
         <h3 class="card-header">
           <div class="input-group mb-3">
