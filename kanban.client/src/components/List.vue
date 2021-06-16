@@ -4,6 +4,8 @@
       <p>list items</p>
       <h3>{{ list.title }}</h3>
       <h3>{{ list.description }}</h3>
+
+      <Task />
     </div>
     <Task v-for="task in state.tasks" :key="task.id" :task="task" />
   </div>
