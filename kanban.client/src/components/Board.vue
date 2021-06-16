@@ -1,6 +1,6 @@
 <template>
   <div class="col-3 m-4 board-card">
-    <router-link :to="{name: 'Board', params: { id: board.id}}" :key="board.id" @click="getBoardInfo(board.id)">
+    <router-link :to="{name: 'Board', params: { id: board.id }}" :key="board.id" @click="getBoardInfo(board.id)">
       <h1>{{ board.title }}</h1>
     </router-link>
   </div>
@@ -9,6 +9,7 @@
 <script>
 import { reactive } from '@vue/reactivity'
 import { boardsService } from '../services/BoardsService'
+
 export default {
   props: {
     board: { type: Object, required: true }

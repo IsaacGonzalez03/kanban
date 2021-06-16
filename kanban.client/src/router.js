@@ -17,7 +17,7 @@ const routes = [
     component: loadPage('AboutPage')
   },
   {
-    path: '/boards',
+    path: '/boards/:id',
     name: 'Board',
     component: loadPage('BoardPage')
   },

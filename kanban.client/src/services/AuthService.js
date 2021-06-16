@@ -25,8 +25,8 @@ AuthService.on(AuthService.AUTH_EVENTS.AUTHENTICATED, async function() {
   api.interceptors.request.use(refreshAuthToken)
   AppState.user = AuthService.user
   await accountService.getAccount()
-  await boardsService.getBoards()
   // NOTE if there is something you want to do once the user is authenticated, place that here
+  await boardsService.getBoards()
 })
 
 async function refreshAuthToken(config) {
