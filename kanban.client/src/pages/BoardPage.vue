@@ -8,15 +8,11 @@
       <div class="col-md-4">
         <form class="border bg-light p-3">
           <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">New Task Title</label>
-            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-          </div>
-          <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <label for="exampleFormControlInput1" class="form-label">New List Title</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="List Title">
           </div>
           <button class="btn btn-primary" type="submit">
-            Add Task
+            Add Title
           </button>
         </form>
       </div>
