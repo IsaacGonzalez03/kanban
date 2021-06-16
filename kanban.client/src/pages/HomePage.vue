@@ -1,12 +1,16 @@
 <template>
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
+      <div class="col d-flex justify-content-end align-items-center">
+        <button type="button" class="btn btn-info m-5 p-2 fw-bolder shadow-sm" data-toggle="modal" data-target="#createBoardModal">
+          New Board <i class="fas fa-list-ul"></i>
+        </button>
+      </div>
+    </div>
+    <div class="row justify-content-around">
       <Board v-for="b in boards" :key="b.id" :board="b" />
     </div>
     <div class="row">
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createBoardModal">
-        Create Board
-      </button>
       <div>
         <CreateBoardModal />
       </div>

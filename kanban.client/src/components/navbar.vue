@@ -1,8 +1,10 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-info d-flex align-items-center">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div class="d-flex flex-column align-items-center">
-        <h1>Fake Trello</h1>
+        <h1 class="fw-bolder font-monospace">
+          KANBAN
+        </h1>
       </div>
     </router-link>
     <button
@@ -19,12 +21,12 @@
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <router-link :to="{ name: 'Home' }" class="nav-link">
+          <router-link :to="{ name: 'Home' }" class="nav-link fs-5 fw-light text-light font-monospace">
             Home
           </router-link>
         </li>
         <li class="nav-item">
-          <router-link :to="{ name: 'About' }" class="nav-link">
+          <router-link :to="{ name: 'About' }" class="nav-link fs-5 fw-light text-light font-monospace">
             About
           </router-link>
         </li>
@@ -49,7 +51,7 @@
               height="40"
               class="rounded"
             />
-            <span class="mx-3">{{ user.name }}</span>
+            <span class="mx-3  font-monospace fw-bolder text-uppercase">{{ user.name }}</span>
           </div>
           <div
             class="dropdown-menu p-0 list-group w-100"
