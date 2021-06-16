@@ -4,5 +4,8 @@ import { reactive } from 'vue'
 export const AppState = reactive({
   user: {},
   account: {},
-  boards: []
+  board: [],
+  list: [],
+  task: [],
+  comment: []
 })
