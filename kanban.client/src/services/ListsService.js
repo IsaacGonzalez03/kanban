@@ -10,7 +10,6 @@ class ListsService {
     try {
       const res = await api.get('api/boards/' + id + '/lists')
       AppState.lists = res.data
-      logger.log(res.data, 'get fucked')
     } catch (error) {
       Notification.toast(error)
     }

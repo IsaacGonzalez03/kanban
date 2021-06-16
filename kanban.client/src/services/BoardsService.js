@@ -24,8 +24,15 @@ class BoardsService {
   }
 
   async deleteBoard(id) {
-    const res = api.delete('api/boards' + id)
+    const res = await api.delete('api/boards/' + id)
+    this.getBoards()
     logger.log(res)
+  }
+
+  async editBoard(id, newBoard) {
+    const res = await api.put('api/boards/' + id, newBoard)
+    this.getBoards()
+    return res
   }
 }
 
