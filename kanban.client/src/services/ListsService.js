@@ -1,5 +1,4 @@
 import { AppState } from '../AppState'
-import { logger } from '../utils/Logger'
 import Notification from '../utils/Notification'
 
 // const { default: Notification } = require('../utils/Notification')
