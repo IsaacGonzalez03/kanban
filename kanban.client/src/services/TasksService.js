@@ -1,3 +1,4 @@
+import { AppState } from '../AppState'
 import { logger } from '../utils/Logger'
 import { api } from './AxiosService'
 
@@ -5,6 +6,7 @@ class TasksService {
   async getTasks(id) {
     try {
       const res = await api.get(`api/lists/${id}/tasks`)
+      AppState.tasks[id] = res.data
       logger.log(res.data)
     } catch (error) {
     }

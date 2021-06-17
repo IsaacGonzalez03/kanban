@@ -7,6 +7,9 @@
     <div>
       {{ task.title }}
     </div>
+    <Comment v-for="comment in state.comments" :key="comment.id" :comment="comment" />
+    <div>
+    </div>
   </div>
 </template>
 
@@ -23,14 +26,11 @@ export default {
   setup(props) {
     const state = reactive({
       newComment: {},
-      comments: computed(() => AppState.comments)
+      comments: computed(() => AppState.comments[props.task.id])
     })
-    onMounted(async() => {
-      await commentsService.getComments(props.task.id)
-    })
+    onMounted(async() => await commentsService.getComments(props.task.id))
     return {
       state
-
     }
   }
 }

@@ -16,8 +16,9 @@
 <script>
 import { listsService } from '../services/ListsService'
 import Notification from '../utils/Notification'
-import { onMounted, reactive } from '@vue/runtime-core'
+import { computed, onMounted, reactive } from '@vue/runtime-core'
 import { tasksService } from '../services/TasksService'
+import { AppState } from '../AppState'
 
 export default {
   props: {
@@ -25,7 +26,8 @@ export default {
   },
   setup(props) {
     const state = reactive({
-      newTask: {}
+      newTask: {},
+      tasks: computed(() => AppState.tasks[props.list.id])
     })
     onMounted(async() => await tasksService.getTasks(props.list.id))
     return {
