@@ -4,7 +4,9 @@
       <i class="far fa-window-close float-right text-end text-secondary m-1" @click="deleteList(list.id, list.boardId)"></i>
       <h2>{{ list.title }}</h2>
     </div>
-    <Task v-for="task in state.tasks" :key="task.id" :task="task" />
+    <div class="row">
+      <Task v-for="task in state.tasks" :key="task.id" :task="task" />
+    </div>
     <form @submit.prevent="createTask">
       <input type="text" v-model="state.newTask.title" class="form-control" placeholder="new task...">
     </form>
@@ -42,7 +44,6 @@ export default {
           await tasksService.createTask(state.newTask)
           state.newTask = {}
         } catch (error) {
-
         }
       }
     }
