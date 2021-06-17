@@ -23,19 +23,26 @@
 
 <script>
 import { reactive } from '@vue/reactivity'
-import { computed } from '@vue/runtime-core'
+import { computed, onMounted } from '@vue/runtime-core'
 import { AppState } from '../AppState'
+import { commentsService } from '../services/CommentsService'
 
 export default {
   props: {
     task: { type: Object, required: true }
   },
-  setup() {
+  setup(props) {
     const state = reactive({
-      newTask: {},
-      tasks: computed(() => AppState.tasks)
+      newComment: {},
+      comments: computed(() => AppState.comments)
     })
-    return { state }
+    onMounted(async() => {
+      await commentsService.getComments(props.task.id)
+    })
+    return {
+      state
+
+    }
   }
 }
 </script>

@@ -6,7 +6,7 @@ class BoardsService {
   async createBoard(newBoard) {
     try {
       const res = api.post('/api/boards/', newBoard)
-      logger.log(res)
+      AppState.boards = res.data
     } catch (error) {
       Notification.toast(error)
     }
@@ -15,12 +15,11 @@ class BoardsService {
   async getBoards() {
     const res = await api.get('/api/boards')
     AppState.boards = res.data
-    logger.log(res)
   }
 
   async getBoardInfo(id) {
     const res = await api.get('api/boards/' + id)
-    logger.log('get the info for board', res)
+    AppState.activeBoard = res.data
   }
 
   async deleteBoard(id) {

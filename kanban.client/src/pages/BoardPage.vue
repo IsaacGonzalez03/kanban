@@ -1,52 +1,60 @@
 <template>
   <div class="container-fluid">
-    <div class="row">
-      <h1>this is the board page</h1>
-      <List v-for="l in lists" :key="l.id" :list="l" />
-    </div>
     <div class="row my-5">
       <div class="col-md-4">
-        <form class="border bg-light p-3">
+        <h1>
+          Board title
+        </h1>
+        <form @submit.prevent="createList" class="border bg-light p-3">
           <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">New List Title</label>
-            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="List Title">
+            <input v-model="state.newList.title" type="text" class="form-control" id="newList" placeholder="new list...">
           </div>
-          <button class="btn btn-primary" type="submit">
-            Add Title
-          </button>
         </form>
       </div>
+    </div>
+    <div class="row">
+      <List v-for="list in state.lists" :key="list.id" :list="list" />
     </div>
   </div>
 </template>
 
 <script>
-import { computed, onMounted, reactive } from '@vue/runtime-core'
+import { computed, onMounted, reactive } from 'vue'
 import { AppState } from '../AppState'
 import { listsService } from '../services/ListsService'
 import { useRoute } from 'vue-router'
 import Notification from '../utils/Notification'
+import { boardsService } from '../services/BoardsService'
 
 export default {
   setup() {
-    const state = reactive({
-      list: computed(() => AppState.lists)
-    })
     const route = useRoute()
+    const state = reactive({
+      newList: {},
+      activeBoard: computed(() => AppState.activeBoard),
+      lists: computed(() => AppState.lists)
+    })
     onMounted(async() => {
       try {
+        await boardsService.getBoards(route.params.id)
         await listsService.getLists(route.params.id)
       } catch (error) {
         Notification.toast(error)
       }
     })
-
     return {
       state,
-      lists: computed(() => AppState.lists)
+      async createList() {
+        try {
+          state.newList.boardId = route.params.id
+          await listsService.createList(state.newList)
+          state.newList = {}
+        } catch (error) {
+          Notification.toast('error')
+        }
+      }
     }
   }
-
 }
 </script>
 

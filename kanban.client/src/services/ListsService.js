@@ -13,6 +13,16 @@ class ListsService {
       Notification.toast(error)
     }
   }
+
+  async createList(newList) {
+    await api.post('api/lists', newList)
+    this.getLists(newList.boardId)
+  }
+
+  async deleteList(id, boardId) {
+    await api.delete('api/lists/' + id)
+    this.getLists(boardId)
+  }
 }
 
 export const listsService = new ListsService()
