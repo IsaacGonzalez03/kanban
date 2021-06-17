@@ -1,19 +1,20 @@
 <template>
   <div class="container-fluid">
-    <div class="row my-5">
-      <div class="col-md-4">
-        <h1>
-          Board title
+    <div class="row my-2 justify-content-center">
+      <div class="col-md-6">
+        <h1 class="text-center">
         </h1>
-        <form @submit.prevent="createList" class="border bg-light p-3">
-          <div class="mb-3">
+        <form @submit.prevent="createList" class="border bg-light p-1">
+          <div class="m-3">
             <input v-model="state.newList.title" type="text" class="form-control" id="newList" placeholder="new list...">
           </div>
         </form>
       </div>
     </div>
     <div class="row">
-      <List v-for="list in state.lists" :key="list.id" :list="list" />
+      <div class="card-columns">
+        <List v-for="list in state.lists" :key="list.id" :list="list" />
+      </div>
     </div>
   </div>
 </template>
@@ -37,6 +38,7 @@ export default {
     onMounted(async() => {
       try {
         await boardsService.getBoards(route.params.id)
+        await boardsService.getBoardInfo(route.params.id)
         await listsService.getLists(route.params.id)
       } catch (error) {
         Notification.toast(error)

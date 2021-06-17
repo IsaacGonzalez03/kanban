@@ -27,7 +27,6 @@ export default {
 
   setup() {
     return {
-
       boards: computed(() => AppState.boards)
     }
   }

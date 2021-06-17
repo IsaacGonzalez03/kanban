@@ -1,20 +1,18 @@
 <template>
-  <div class="col">
-    <div class="card">
-      <h3 class="card-header">
-      </h3>
-    </div>
+  <div class="card">
     <div>
-      {{ task.title }}
+      <i @click="deleteTask(task.id)" class="far fa-window-close text-danger"></i><p>{{ task.title }}</p>
     </div>
+    <form @submit.prevent="createComment">
+      <input type="text" v-model="state.newComment.description" class="form-control" placeholder="comment...">
+    </form>
     <Comment v-for="comment in state.comments" :key="comment.id" :comment="comment" />
-    <div>
-    </div>
   </div>
 </template>
 
 <script>
 import { reactive } from '@vue/reactivity'
+import { tasksService } from '../services/TasksService'
 import { computed, onMounted } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import { commentsService } from '../services/CommentsService'
@@ -30,7 +28,22 @@ export default {
     })
     onMounted(async() => await commentsService.getComments(props.task.id))
     return {
-      state
+      async deleteTask(id) {
+        try {
+          await tasksService.deleteTask(id, props.task.listId)
+        } catch (error) {
+        }
+      },
+      state,
+      async createComment() {
+        try {
+          state.newComment.taskId = props.task.id
+          await commentsService.createComment(state.newComment)
+          state.newComment = {}
+        } catch (error) {
+
+        }
+      }
     }
   }
 }

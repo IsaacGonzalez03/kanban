@@ -18,7 +18,7 @@ class CommentsService {
   }
 
   async deleteComment(id, taskId) {
-    await api.delete('api/comments' + id)
+    await api.delete('api/comments/' + id)
     this.getComments(taskId)
   }
 }

@@ -18,8 +18,12 @@ class TasksService {
   }
 
   async deleteTask(id, listId) {
-    await api.delete('api/tasks/' + id)
-    this.getTasks(listId)
+    try {
+      await api.delete('api/tasks/' + id)
+      this.getTasks(listId)
+    } catch (error) {
+
+    }
   }
 }
 export const tasksService = new TasksService()

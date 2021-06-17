@@ -1,24 +1,28 @@
 <template>
-  <div class="comment row">
-    <div class="col card">
-      <div class="card-body">
-        <p>{{ comment.description }}</p>
-      </div>
-    </div>
-  </div>
+  <p><i @click="deleteComment(comment.id)" class="fas fa-minus text-dager"></i>{{ comment.description }}</p>
 </template>
 
 <script>
 import { reactive } from '@vue/reactivity'
+import { commentsService } from '../services/CommentsService'
 export default {
   name: 'Comment',
   props: {
     comment: { type: Object, required: true }
   },
-  setup() {
+  setup(props) {
     const state = reactive({
     })
-    return { state }
+    return {
+      state,
+      async deleteComment(id) {
+        try {
+          await commentsService.deleteComment(id, props.comment.taskId)
+        } catch (error) {
+
+        }
+      }
+    }
   }
 }
 </script>

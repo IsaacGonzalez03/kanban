@@ -1,15 +1,15 @@
 <template>
-  <div class="col-4">
-    <div class="border">
+  <div class="card p-2">
+    <div class="p-3">
       <i class="far fa-window-close float-right text-end text-secondary m-1" @click="deleteList(list.id, list.boardId)"></i>
       <h2>{{ list.title }}</h2>
     </div>
-    <div class="row">
-      <Task v-for="task in state.tasks" :key="task.id" :task="task" />
-    </div>
-    <form @submit.prevent="createTask">
+    <Task v-for="task in state.tasks" :key="task.id" :task="task" />
+    <form @submit.prevent="createTask" class="p-3">
       <input type="text" v-model="state.newTask.title" class="form-control" placeholder="new task...">
     </form>
+    <div>
+    </div>
   </div>
 </template>
 
