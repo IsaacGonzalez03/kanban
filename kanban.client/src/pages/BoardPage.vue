@@ -5,7 +5,7 @@
         <h1 class="text-center">
         </h1>
         <form @submit.prevent="createList" class="border bg-light p-1">
-          <div class="m-3">
+          <div class="m-3 border-rounded">
             <input v-model="state.newList.title" type="text" class="form-control" id="newList" placeholder="new list...">
           </div>
         </form>

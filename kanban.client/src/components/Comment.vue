@@ -1,18 +1,16 @@
 <template>
-  <div class="border">
-    <p>
-      <i @click="deleteComment(comment.id)" class="fas fa-minus text-dager">
-      </i>
-    </p>
+  <div>
+    <small @click="deleteComment(comment.id)" class="mt-3 ml-2 fas fa-minus text-danger mr-1"></small>
     <img class="userPic" :src="comment.creator.picture">
-    <p>{{ comment.description }}</p>
-    <p>{{ comment.creator.name }}</p>
+    <small class="fw-bold ">{{ comment.creator.name }}:<small /><small> {{ comment.description }}</small>
+    </small>
   </div>
 </template>
 
 <script>
 import { reactive } from '@vue/reactivity'
 import { commentsService } from '../services/CommentsService'
+import Notification from '../utils/Notification'
 export default {
   name: 'Comment',
   props: {
@@ -26,6 +24,7 @@ export default {
       async deleteComment(id) {
         try {
           await commentsService.deleteComment(id, props.comment.taskId)
+          Notification.toast('Comment Deleted', 'success')
         } catch (error) {
 
         }

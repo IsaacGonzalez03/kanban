@@ -1,10 +1,11 @@
 <template>
-  <div class="card task-daddy" @dragstart="prepToMove">
-    <div>
-      <i @click="deleteTask(task.id)" class="far fa-window-close text-danger"></i><p>{{ task.title }}</p>
-    </div>
-    <form @submit.prevent="createComment">
-      <input type="text" v-model="state.newComment.description" class="form-control" placeholder="comment...">
+  <div class="" @dragstart="prepToMove">
+    <p class="m-0 fs-4">
+      <i @click="deleteTask(task.id)" class="far fa-window-close text-secondary fs-6"></i>
+      {{ task.title }}
+    </p>
+    <form @submit.prevent="createComment" class="pl-3 pr-3">
+      <input type="text" v-model="state.newComment.description" class="form-control" placeholder="comment on your task...">
     </form>
     <Comment v-for="comment in state.comments" :key="comment.id" :comment="comment" />
   </div>
@@ -17,6 +18,7 @@ import { computed, onMounted } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import { commentsService } from '../services/CommentsService'
 import { logger } from '../utils/Logger'
+import Notification from '../utils/Notification'
 
 export default {
   props: {
@@ -35,6 +37,7 @@ export default {
       async deleteTask(id) {
         try {
           await tasksService.deleteTask(id, props.task.listId)
+          Notification.toast('Task Deleted', 'success')
         } catch (error) {
         }
       },

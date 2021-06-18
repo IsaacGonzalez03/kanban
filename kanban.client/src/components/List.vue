@@ -1,10 +1,12 @@
 <template>
-  <div class="card p-2" dropzone="zone" @dragover.prevent @drop.prevent="MoveItem">
-    <div class="p-3">
+  <div class="card p-2 border-info" dropzone="zone" @dragover.prevent @drop.prevent="MoveItem">
+    <div class="d-flex float-right">
       <i class="far fa-window-close float-right text-end text-secondary m-1" @click="deleteList(list.id, list.boardId)"></i>
-      <h2>{{ list.title }}</h2>
     </div>
-    <transition-group name="item" tag="div" class=" row space-evenly mt-3">
+    <h1 class="ml-2 mt-2 mb-0">
+      {{ list.title }}
+    </h1>
+    <transition-group name="item" tag="div" class="space-evenly mt-3">
       <Task v-for="task in state.tasks" @draggable="true" :key="task.id" :task="task" :list="list" />
     </transition-group>
     <form @submit.prevent="createTask" class="p-3">
@@ -37,7 +39,7 @@ export default {
       async deleteList(id, boardId) {
         try {
           await listsService.deleteList(id, boardId)
-          Notification.confirmAction()
+          Notification.toast('List Deleted', 'success')
         } catch (error) {
           Notification.toast(error)
         }
@@ -52,7 +54,6 @@ export default {
       },
       MoveItem() {
         tasksService.MoveItem(props.list.id)
-        console.log('drop here in', props.list.id)
       }
     }
   }
@@ -61,5 +62,8 @@ export default {
 </script>
 
 <style>
+.thick{
+  border: 5px #00C9BD;
+}
 
 </style>

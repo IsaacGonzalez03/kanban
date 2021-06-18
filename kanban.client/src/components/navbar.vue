@@ -3,7 +3,8 @@
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div class="d-flex flex-column align-items-center">
         <h1 class="fw-bolder font-monospace m-3">
-          KANBAN
+          <img class="img-fluid smaller" src="https://static.wixstatic.com/media/2cd43b_a48004184a3b4644aab1de5af46706c9~mv2.png/v1/fill/w_320,h_284,q_90/2cd43b_a48004184a3b4644aab1de5af46706c9~mv2.png" alt="">
+          CABEZA
         </h1>
       </div>
     </router-link>
@@ -33,7 +34,7 @@
       </ul>
       <span class="navbar-text">
         <button
-          class="btn btn-outline-primary text-uppercase"
+          class="btn btn-outline-light text-uppercase"
           @click="login"
           v-if="!user.isAuthenticated"
         >
@@ -101,6 +102,9 @@ export default {
 </script>
 
 <style scoped>
+.smaller{
+  height: 5rem;
+}
 .dropdown-menu {
   user-select: none;
   display: block;
