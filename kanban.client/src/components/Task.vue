@@ -24,7 +24,8 @@ export default {
   setup(props) {
     const state = reactive({
       newComment: {},
-      comments: computed(() => AppState.comments[props.task.id])
+      comments: computed(() => AppState.comments[props.task.id]),
+      account: computed(() => AppState.account)
     })
     onMounted(async() => await commentsService.getComments(props.task.id))
     return {
@@ -38,7 +39,7 @@ export default {
       async createComment() {
         try {
           state.newComment.taskId = props.task.id
-          await commentsService.createComment(state.newComment)
+          await commentsService.createComment(state.newComment, state.account)
           state.newComment = {}
         } catch (error) {
 

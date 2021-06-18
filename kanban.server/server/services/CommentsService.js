@@ -4,6 +4,7 @@ import { BadRequest } from '../utils/Errors'
 class CommentsService {
   async getCommentsByTaskId(id = {}) {
     return await dbContext.Comment.find(id)
+      .populate('creator', 'name picture')
   }
 
   async getComment(commentId) {
@@ -11,7 +12,9 @@ class CommentsService {
   }
 
   async createComment(body) {
-    return await dbContext.Comment.create(body)
+    const comment = await dbContext.Comment.create(body)
+    await comment.populate('creator', 'name picture').execPopulate()
+    return comment
   }
 
   async editComment(body) {

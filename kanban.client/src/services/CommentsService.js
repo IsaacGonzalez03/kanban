@@ -7,14 +7,15 @@ class CommentsService {
     try {
       const res = await api.get(`api/tasks/${id}/comments`)
       AppState.comments[id] = res.data
-      logger.log(res.data)
+      logger.log('comment recieved', res.data)
     } catch (error) {
     }
   }
 
-  async createComment(newComment) {
-    await api.post('api/comments', newComment)
+  async createComment(newComment, account) {
+    await api.post('api/comments', newComment, account)
     this.getComments(newComment.taskId)
+    logger.log('created comment', newComment, account)
   }
 
   async deleteComment(id, taskId) {

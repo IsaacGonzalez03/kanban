@@ -1,5 +1,13 @@
 <template>
-  <p><i @click="deleteComment(comment.id)" class="fas fa-minus text-dager"></i>{{ comment.description }}</p>
+  <div class="border">
+    <p>
+      <i @click="deleteComment(comment.id)" class="fas fa-minus text-dager">
+      </i>
+    </p>
+    <img class="userPic" :src="comment.creator.picture">
+    <p>{{ comment.description }}</p>
+    <p>{{ comment.creator.name }}</p>
+  </div>
 </template>
 
 <script>
@@ -28,5 +36,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.userPic {
+  height: 1.5rem;
+  width: 1.5rem;
+  border-radius: 50%;
+}
 </style>
