@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="card task-daddy" @dragstart="prepToMove">
     <div>
       <i @click="deleteTask(task.id)" class="far fa-window-close text-danger"></i><p>{{ task.title }}</p>
     </div>
@@ -16,10 +16,12 @@ import { tasksService } from '../services/TasksService'
 import { computed, onMounted } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import { commentsService } from '../services/CommentsService'
+import { logger } from '../utils/Logger'
 
 export default {
   props: {
-    task: { type: Object, required: true }
+    task: { type: Object, required: true },
+    list: { type: Object, required: true }
   },
   setup(props) {
     const state = reactive({
@@ -29,13 +31,13 @@ export default {
     })
     onMounted(async() => await commentsService.getComments(props.task.id))
     return {
+      state,
       async deleteTask(id) {
         try {
           await tasksService.deleteTask(id, props.task.listId)
         } catch (error) {
         }
       },
-      state,
       async createComment() {
         try {
           state.newComment.taskId = props.task.id
@@ -44,6 +46,10 @@ export default {
         } catch (error) {
 
         }
+      },
+      prepToMove() {
+        tasksService.prepToMove(props.task, props.list.id)
+        logger.log('prep to move', props.task.id, props.list.id)
       }
     }
   }
@@ -51,5 +57,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+.task-daddy {
+  background-color: aquamarine;
+}
 
 </style>

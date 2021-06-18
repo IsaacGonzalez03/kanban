@@ -25,5 +25,17 @@ class TasksService {
 
     }
   }
+
+  async prepToMove(task, listId) {
+    task.oldListId = listId
+    AppState.tempTask = task
+  }
+
+  async MoveItem(newListId) {
+    const oldId = AppState.tempTask.oldListId
+    const res = await api.put('api/tasks/' + oldId, newListId)
+    logger.log('hopefully moved', res)
+    this.getTasks()
+  }
 }
 export const tasksService = new TasksService()

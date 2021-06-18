@@ -1,10 +1,12 @@
 <template>
-  <div class="card p-2">
+  <div class="card p-2" dropzone="zone" @dragover.prevent @drop.prevent="MoveItem">
     <div class="p-3">
       <i class="far fa-window-close float-right text-end text-secondary m-1" @click="deleteList(list.id, list.boardId)"></i>
       <h2>{{ list.title }}</h2>
     </div>
-    <Task v-for="task in state.tasks" :key="task.id" :task="task" />
+    <transition-group name="item" tag="div" class=" row space-evenly mt-3">
+      <Task v-for="task in state.tasks" @draggable="true" :key="task.id" :task="task" :list="list" />
+    </transition-group>
     <form @submit.prevent="createTask" class="p-3">
       <input type="text" v-model="state.newTask.title" class="form-control" placeholder="new task...">
     </form>
@@ -47,6 +49,10 @@ export default {
           state.newTask = {}
         } catch (error) {
         }
+      },
+      MoveItem() {
+        tasksService.MoveItem(props.list.id)
+        console.log('drop here in', props.list.id)
       }
     }
   }
