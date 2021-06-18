@@ -42,6 +42,7 @@ export default {
 
       deleteBoard(id) {
         boardsService.deleteBoard(id)
+        Notification.toast('List Deleted', 'success')
       },
 
       async editTitle(board) {
