@@ -43,7 +43,7 @@ export class TasksController extends BaseController {
   }
 
   async editTask(req, res, next) {
-    req.params.id = req.userInfo.id
+    req.body.id = req.params.id
     try {
       const data = await tasksService.editTask(req.body)
       return res.send(data)

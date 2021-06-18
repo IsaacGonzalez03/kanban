@@ -33,9 +33,14 @@ class TasksService {
 
   async MoveItem(newListId) {
     const oldId = AppState.tempTask.oldListId
-    const res = await api.put('api/tasks/' + oldId, newListId)
+    const targetTask = AppState.tempTask.id
+    AppState.tempTask.listId = newListId
+    logger.log('task to edit', targetTask)
+
+    logger.log('old Id', oldId)
+    const res = await api.put('api/tasks/' + targetTask, AppState.tempTask)
     logger.log('hopefully moved', res)
-    this.getTasks()
+    this.getTasks(newListId)
   }
 }
 export const tasksService = new TasksService()

@@ -14,7 +14,7 @@ class TasksService {
   }
 
   async editTask(body) {
-    const data = await dbContext.Task.findByIdAndUpdate({ _id: body.id }, body, { new: true })
+    const data = await dbContext.Task.findOneAndUpdate({ _id: body.id }, body, { new: true })
     if (!data) throw new BadRequest('Invalid Id')
     return data
   }

@@ -1,5 +1,5 @@
 <template>
-  <div class="card task-daddy" @dragstart="prepToMove">
+  <div class="card task-daddy" @draggable="true" @dragstart="prepToMove">
     <div>
       <i @click="deleteTask(task.id)" class="far fa-window-close text-danger"></i><p>{{ task.title }}</p>
     </div>
@@ -49,7 +49,7 @@ export default {
       },
       prepToMove() {
         tasksService.prepToMove(props.task, props.list.id)
-        logger.log('prep to move', props.task.id, props.list.id)
+        logger.log('this tasks id', props.task.id, 'this lists is', props.list.id)
       }
     }
   }

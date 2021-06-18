@@ -5,7 +5,7 @@
       <h2>{{ list.title }}</h2>
     </div>
     <transition-group name="item" tag="div" class=" row space-evenly mt-3">
-      <Task v-for="task in state.tasks" @draggable="true" :key="task.id" :task="task" :list="list" />
+      <Task v-for="task in state.tasks" :key="task.id" :task="task" :list="list" />
     </transition-group>
     <form @submit.prevent="createTask" class="p-3">
       <input type="text" v-model="state.newTask.title" class="form-control" placeholder="new task...">
@@ -50,9 +50,9 @@ export default {
         } catch (error) {
         }
       },
-      MoveItem() {
-        tasksService.MoveItem(props.list.id)
-        console.log('drop here in', props.list.id)
+      async MoveItem() {
+        await tasksService.MoveItem(props.list.id)
+        console.log('drop here in this list', props.list.id)
       }
     }
   }
